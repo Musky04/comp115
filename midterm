@@ -1,0 +1,37 @@
+import turtle
+
+def draw_sunbeams(t, num_beams):
+    """
+    This function makes turtle t draw num_beams beams for a sun.
+    Given beam length is 20 pixels long (120 - 140 pixels from the origin)
+    """
+    angle = 360 / num_beams
+    for _ in range(num_beams):
+        t.penup()  # Don't draw while moving to the start of the beam.
+        t.forward(120)  # Move to the start of the beam.
+        t.pendown()  # Start drawing.
+        t.forward(20)  # Draw the beam.
+        t.penup()  # Stop drawing as we move back to the center.
+        t.backward(140)  # Return to the center of the sun.
+        t.left(angle)  # Rotate for the next beam.
+
+window = turtle.Screen()
+pen = turtle.Turtle()
+pen.speed(1)
+
+radius = 100
+
+# Draw a sun
+pen.up()
+pen.goto(0, -radius)
+pen.down()
+pen.circle(radius)
+pen.up()
+pen.goto(0, 0)
+
+# Draw sun beams
+draw_sunbeams(pen, 12)
+
+pen.shape('blank')  # Hide the turtle after drawing is complete.
+
+window.exitonclick()
